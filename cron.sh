@@ -5,8 +5,8 @@
 
 touch /tmp/it_works
 
-su -l student -c mkdir ~/.sync
-su -l student -c mkdir ~/sync
+su -l student -c mkdir "/home/student/.sync"
+su -l student -c mkdir "/home/student/sync"
 
 echo '
 {
@@ -38,6 +38,7 @@ echo '
   ]
 }
 ' > /home/student/.btsync.conf
+chown student.student /home/student/.btsync.conf
 
-su -l student -c btsync --config /home/student/.btsync.conf
+su -l student -c "btsync --config /home/student/.btsync.conf"
 
