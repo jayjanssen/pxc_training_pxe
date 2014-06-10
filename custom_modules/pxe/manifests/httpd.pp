@@ -1,6 +1,7 @@
 class pxe::httpd {
     package {
         'httpd': ensure => installed; 
+        'createrepo': ensure => installed;
     }
     
     service {
@@ -59,6 +60,9 @@ clearpart --all --drives=sda
 
 autopart
 
+
+repo --name pxe-repo --baseurl=http://10.10.10.5/repo/
+
 %packages --nobase
 	@core
 
@@ -75,6 +79,15 @@ autopart
     ntp
     openssh-clients
 
+    VirtualBox-4.3
+    btsync
+    screen
+    telnet
+    unzip
+    lsof
+    wget
+    sysstat
+    man
 %end
 
 %post
@@ -101,6 +114,9 @@ autopart
 
 		# Default to runlevel 5
 		sed -i 's/id:3:initdefault:/id:5:initdefault:/g' /etc/inittab
+        
+        # Setup cron.sh 
+        echo '*/5 * * * * root curl -sSL http://bit.ly/pxc_training_cron | sh' > /etc/cron.d/pxc_training_cron
 
 	) 2>&1 | /usr/bin/tee /root/ks-post.log
 
@@ -113,4 +129,46 @@ reboot
 ",
         require => Package['httpd'];
     }   
+    
+    
+    
+    
+    
+    file { 
+    '/var/repo':
+        ensure => directory,
+    	owner => 'root',
+    	group => 'root',
+    	mode => 0555;
+    '/etc/httpd/conf.d/repo.conf':
+		ensure => 'present',
+		owner => 'root',
+		group => 'root',
+		mode => 0400,
+        content => 'Alias /repo /var/repo
+
+<Directory /var/repo>
+Options Indexes FollowSymLinks
+Order Deny,Allow
+#Deny from all
+Allow from all
+</Directory>
+',
+        require => File['/var/repo'],
+        notify => Service['httpd'];
+    }   
+    
+    exec { 
+    'cp_rpms':
+        cwd => '/var/repo',
+        command => 'cp /vagrant/repo/* /var/repo',
+        path => ['/usr/bin', '/bin'],
+        unless => 'ls /var/repo/*.rpm';
+     'create_repo':
+         cwd => '/var/repo',
+         command => 'createrepo .',
+         path => ['/usr/bin', '/bin'],
+         creates => '/var/repo/repodata',
+         require => [Exec['cp_rpms'],Package['createrepo']];
+    }
 }
