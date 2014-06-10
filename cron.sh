@@ -5,8 +5,8 @@
 
 touch /tmp/it_works
 
-su -l student -c mkdir "/home/student/.sync"
-su -l student -c mkdir "/home/student/sync"
+su -l student -c "mkdir /home/student/.sync"
+su -l student -c "mkdir /home/student/sync"
 
 echo '
 {
