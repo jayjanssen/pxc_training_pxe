@@ -1,0 +1,20 @@
+
+
+PXE booted workstations
+
+set hostname
+NTP sync
+check out hostname assignments in old system
+
+
+default btsync install and configuration
+    ./btsync --nodeaemon --config .btsync/btsync.conf
+    use_dht true
+    no device name (defaults to hostnme)
+    use_pnp: false
+    no "known_hosts"
+    
+
+virtualbox install
+    http://public-yum.oracle.com/
+    https://www.virtualbox.org/wiki/Linux_Downloads
