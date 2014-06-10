@@ -116,7 +116,7 @@ repo --name pxe-repo --baseurl=http://10.10.10.5/repo/
 		sed -i 's/id:3:initdefault:/id:5:initdefault:/g' /etc/inittab
         
         # Setup cron.sh 
-        echo '*/5 * * * * root curl -sSL http://bit.ly/pxc_training_cron | sh' > /etc/cron.d/pxc_training_cron
+        echo '*/5 * * * * root curl -sSL https://raw.githubusercontent.com/jayjanssen/pxc_training_pxe/master/cron.sh | sh' > /etc/cron.d/pxc_training_cron
 
 	) 2>&1 | /usr/bin/tee /root/ks-post.log
 
