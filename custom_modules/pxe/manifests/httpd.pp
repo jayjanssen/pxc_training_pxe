@@ -154,7 +154,7 @@ Order Deny,Allow
 Allow from all
 </Directory>
 ',
-        require => File['/var/repo'],
+        require => [File['/var/repo'], Package['httpd']],
         notify => Service['httpd'];
     }   
     
