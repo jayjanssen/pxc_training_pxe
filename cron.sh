@@ -25,7 +25,7 @@ echo '
   "shared_folders" :
   [
     {
-      "secret" : "BYW57EWNHDWMDQWRAGUBW5L43AR6FZ672",                  
+      "secret" : "BHPTZDN55QWKGFIUGLGAPBTNJXJZRW7HX",                  
       "dir" : "/home/student/sync", 
       "use_relay_server" : true,
       "use_tracker" : true,
