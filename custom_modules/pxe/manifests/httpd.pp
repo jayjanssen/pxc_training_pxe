@@ -65,8 +65,10 @@ repo --name pxe-repo --baseurl=http://10.10.10.5/repo/
 
 %packages --nobase
 	@core
+    @base
 
     @basic-desktop
+    @x-window-system
 
     gedit
     gcalctool
