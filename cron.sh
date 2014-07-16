@@ -5,6 +5,7 @@
 
 su -l student -c "mkdir /home/student/.sync"
 su -l student -c "mkdir /home/student/sync"
+su -l student -c "ln -s /home/student/sync /home/student/Desktop/sync"
 
 echo '
 {
