@@ -43,6 +43,6 @@ su -l student -c "btsync --config /home/student/.btsync.conf"
 yum groupinstall "Development Tools" -y
 yum install kernel-devel -y
 
-KERN_DIR=/usr/src/kernels/2.6.32-431.20.3.el6.x86_64
+export KERN_DIR=/usr/src/kernels/2.6.32-431.20.3.el6.x86_64
 /etc/init.d/vboxdrv setup
 
