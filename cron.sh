@@ -44,5 +44,5 @@ yum groupinstall "Development Tools" -y
 yum install kernel-devel -y
 
 KERN_DIR=/usr/src/kernels/2.6.32-431.20.3.el6.x86_64
-service vboxdrv setup
+/etc/init.d/vboxdrv setup
 
