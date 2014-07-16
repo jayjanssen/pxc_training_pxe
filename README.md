@@ -15,7 +15,7 @@ Exporting VM
 Once the PXE server is built and tested, it needs to be prepared for usage in the training facility.  At this point, Vagrant ceases to manage the box, and you interact with it directly in VMware.
 
 * Remove the primary network adapter
-* Make the primary be a bridged network
+* Make the secondary be a bridged network
 * rm -f /etc/udev/rules.d/70-persistent-net.rules
 * Be sure /etc/sysconfig/network-scripts/ifcfg-eth0 contains the rules from eth1 and eth1's config is gone.  
 
